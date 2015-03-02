@@ -19,7 +19,7 @@ class wrapper:
     token =  json.loads(r.content)['token']
     if token is not None:
       self.token = token
-      print self.token
+
   def get_nodes(self):
     r = requests.get(self.url+'/api/nodes/')
     jcontent = json.loads(r.content)
@@ -45,9 +45,8 @@ class wrapper:
     jsonc.silver_mac_prefix = "null"
     jsonc.silver_ipv4_prefix = "null"
     jsonc.group = {'uri':'http://178.62.226.189/api/groups/1'}
-    jsonc.token = self.token
     json_to_send = jsonc.to_JSON() 
-    header = {'Authentication': ' Token '+self.token}
+    header = {'Authorization':' Token '+self.token , 'content-type': 'application/json' }
     r = requests.post(self.url+'/api/nodes/',data=json_to_send,headers=header)
     print r.content
         
